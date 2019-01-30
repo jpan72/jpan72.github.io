@@ -24,4 +24,4 @@ First, the authors use an encoder to learn information from both labeled and unl
 **Weight Loss**
 
 Problem of self-training: biased towards majority class
-Solution: use a loss weighting vector $\lambda$
+Solution: use a loss weighting vector $\lambda$ 
