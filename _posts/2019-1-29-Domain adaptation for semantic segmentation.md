@@ -39,3 +39,24 @@ Randomly masking gradients of easy pixels from the source domain.
 * Encoder: ResNet-18
 * Feature map at bottleneck: dilated by factor of 4
 * Decoder: Pyramid Pooling Modules (PPM)
+
+
+#### 2. Domain Adaptation for Semantic Segmentation via Class-Balanced Self-Training
+
+
+
+
+
+### Apporach 2: Domain transfer in image/feature level
+
+#### 1. Domain Stylization: A Strong, Simple Baseline for Synthetic to Real Image Domain Adaptation
+
+This paper presents an iterative algorithm. Iterative between training two networks:
+
+a. Domain Stylization (DS):
+
+Generate an image that has the semantic information from a target image and in the style of a source image.
+
+b. Semantic Segmentation Learning (SSL):
+
+Predict semantic segmentation from the image generated in step b. Since 
