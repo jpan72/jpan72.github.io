@@ -27,9 +27,11 @@ Problem of self-training: biased towards majority class
 Solution: use a loss weighting vector lambda to assign heavier weights to minority classes. Median inverse frequency is typically used but this paper doubles weights for some classes.
 
 **Target Easy Mining**
+
 Mask out gradient from hard pixels.
 
 **Source Hard Mining**
+
 Randomly masking gradients of easy pixels from the source domain.
 
 ##### c) Experiment details
