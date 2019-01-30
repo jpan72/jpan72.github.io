@@ -15,28 +15,28 @@ There are two apporaches to domain adaptation for semantic segmentation in gener
 
 #### 1. Adaptive Semantic Segmentation with a Strategic Curriculum of Proxy Labels
 
-##### a) Adaptive Segmentation Architecture
+1.1 Adaptive Segmentation Architecture
 
 First, the authors use an encoder to learn information from both labeled and unlabeled data. From there they use two branches of decoders to generate predictions of sementic segmentation. They take an agreement map based on the output of the two decoders. If the labels of a pixel from the two segmentations agree with each other, they consider this as an easy pixel. Otherwise, it is a hard pixel. 
 
 To avoid two decoders learning very similar projections, a penalty using cosine similarity between filters in two decoders is added to objective function.
 
-##### b) Strategic Curriculum
+2. Strategic Curriculum
 
-**Weight Loss**
+2.1 Weight Loss
 
 Problem of self-training: biased towards majority class
 Solution: use a loss weighting vector lambda to assign heavier weights to minority classes. Median inverse frequency is typically used but this paper doubles weights for some classes.
 
-**Target Easy Mining**
+2.2 Target Easy Mining
 
 Mask out gradient from hard pixels.
 
-**Source Hard Mining**
+2.3 Source Hard Mining
 
 Randomly masking gradients of easy pixels from the source domain.
 
-##### c) Experiment details
+3. Experiment details
 
 * Encoder: ResNet-18
 * Feature map at bottleneck: dilated by factor of 4
