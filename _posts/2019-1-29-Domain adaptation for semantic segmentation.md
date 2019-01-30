@@ -34,6 +34,6 @@ Randomly masking gradients of easy pixels from the source domain.
 
 ##### c) Experiment details
 
-1. Encoder: ResNet-18
-1. Feature map at bottleneck: dilated by factor of 4
-1. Decoder: Pyramid Pooling Modules (PPM)
+* Encoder: ResNet-18
+* Feature map at bottleneck: dilated by factor of 4
+* Decoder: Pyramid Pooling Modules (PPM)
