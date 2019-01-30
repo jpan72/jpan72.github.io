@@ -11,7 +11,7 @@ Given an annotated semantic segmentation dataset, the task is to use these annot
 There are two apporaches to domain adaptation for semantic segmentation in general. One is to transfer the source dataset to target dataset in image level or feature level. Another approach uses self-training, which first assign proxy labels for the target dataset and then correct the labels with the annotations on source dataset.
 
 
-### Apporach 1: Self training approaches
+## Apporach 1: Self training approaches
 
 #### 1. Adaptive Semantic Segmentation with a Strategic Curriculum of Proxy Labels
 
@@ -43,13 +43,36 @@ Randomly masking gradients of easy pixels from the source domain.
 * Decoder: Pyramid Pooling Modules (PPM)
 
 
+
 #### 2. Domain Adaptation for Semantic Segmentation via Class-Balanced Self-Training
 
+#### 1. Self-training (ST) with Self-Paced Learning
+
+The objective is to train a segmentation network with weights w such that segmented source images agree with their ground truth labels, and that segmentated target images agree with their pseudo labels.
+
+Two iterative steps:
+
+a) Update w based on the objective mentioned above.
+b) Assign pseudo labels to target images. The assignedment is based on the output of w from step a) with the highest probability.
+
+Note that to enforce the pseudo labels not to be sparse with negative L1 regularization to prevent the trivial solution of ignoring all pseudo-labels. This regularization term has a coefficient so that they can have control over the amount of ignored pseudo labels (larger multiplier means use more pseudo labels for training).
+
+#### 2. Class-balanced self-training (CBST)
+
+To balance the bias towards majority classes, CBST modifies the above iterative steps with a multiplier for each class. A class with a larger coefficient will have more images used for training.
+
+#### 3. Spatial priors (CBST-SP)
+
+This paper use normalized frequency of each class as spatial priors and multiplies the priors to the output of segmentation network.
 
 
 
 
-### Apporach 2: Domain transfer in image/feature level
+
+
+
+
+## Apporach 2: Domain transfer in image/feature level
 
 #### 1. Domain Stylization: A Strong, Simple Baseline for Synthetic to Real Image Domain Adaptation
 
@@ -68,5 +91,7 @@ Predict semantic segmentation from the image generated in DS step. Since we have
 * DS step uses FastPhotoStyle.
 * They use N=10 randomly selected target images to provide style information in DS step.
 * Empirically two iterations are enough.
+
+
 
 
