@@ -19,6 +19,8 @@ There are two apporaches to domain adaptation for semantic segmentation in gener
 
 First, the authors use an encoder to learn information from both labeled and unlabeled data. From there they use two branches of decoders to generate predictions of sementic segmentation. They take an agreement map based on the output of the two decoders. If the labels of a pixel from the two segmentations agree with each other, they consider this as an easy pixel. Otherwise, it is a hard pixel. 
 
+To avoid two decoders learning very similar projections, a penalty using cosine similarity between filters in two decoders is added to objective function.
+
 ##### b) Strategic Curriculum
 
 **Weight Loss**
@@ -55,8 +57,16 @@ This paper presents an iterative algorithm. Iterative between training two netwo
 
 a. Domain Stylization (DS):
 
-Generate an image that has the semantic information from a target image and in the style of a source image.
+Generate an image that has the semantic information from a source image and in the style of a target image.
 
 b. Semantic Segmentation Learning (SSL):
 
-Predict semantic segmentation from the image generated in step b. Since 
+Predict semantic segmentation from the image generated in DS step. Since we have ground truth segmentation for source dataset, if the DS step is successful, then the SSL learned on the stylized source image should have the capability to correctly segment images in the target domain.
+
+##### Experiment details
+
+* DS step uses FastPhotoStyle.
+* They use N=10 randomly selected target images to provide style information in DS step.
+* Empirically two iterations are enough.
+
+
